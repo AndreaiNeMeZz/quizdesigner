@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quiz Interattivo: Flusso di Lavoro Grafico</title>
+    <title>Quiz Interattivo: Flusso di Lavoro Grafico V3</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -11,11 +11,12 @@
     <style>
         body {
             font-family: 'Poppins', sans-serif;
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            background: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%);
         }
         .quiz-container {
             background-color: rgba(255, 255, 255, 0.9);
             backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
         .option-btn {
             transition: all 0.3s ease;
@@ -49,6 +50,7 @@
         }
         #progress-bar-inner {
             transition: width 0.5s ease-out;
+            background: linear-gradient(90deg, #89f7fe 0%, #66a6ff 100%);
         }
     </style>
 </head>
@@ -60,8 +62,8 @@
         <div id="start-screen" class="text-center">
             <div class="quiz-container p-8 rounded-2xl shadow-2xl">
                 <h1 class="text-4xl font-bold text-gray-800 mb-2">Quiz sul Flusso Grafico</h1>
-                <p class="text-gray-600 mb-8">Metti alla prova la tua conoscenza del manuale operativo. Clicca per iniziare!</p>
-                <button id="start-btn" class="w-full bg-blue-600 text-white font-bold py-4 px-8 rounded-xl shadow-lg hover:bg-blue-700 transition-all text-lg transform hover:scale-105">
+                <p class="text-gray-600 mb-8">Metti alla prova la tua conoscenza del nuovo manuale operativo. Sei pronto?</p>
+                <button id="start-btn" class="w-full bg-purple-600 text-white font-bold py-4 px-8 rounded-xl shadow-lg hover:bg-purple-700 transition-all text-lg transform hover:scale-105">
                     Inizia il Quiz
                 </button>
             </div>
@@ -74,7 +76,7 @@
                 <div class="mb-6">
                     <div id="progress-text" class="text-sm font-semibold text-gray-600 mb-2 text-right">Domanda 1 / 10</div>
                     <div id="progress-bar" class="w-full bg-gray-200 rounded-full h-2.5">
-                        <div id="progress-bar-inner" class="bg-blue-600 h-2.5 rounded-full" style="width: 10%"></div>
+                        <div id="progress-bar-inner" class="h-2.5 rounded-full" style="width: 10%"></div>
                     </div>
                 </div>
 
@@ -89,7 +91,7 @@
                 <!-- Hint & Next Button -->
                 <div class="mt-8 flex flex-col sm:flex-row items-center justify-between">
                      <button id="hint-btn" class="bg-gray-200 text-gray-700 font-semibold py-2 px-4 rounded-lg hover:bg-gray-300 transition-colors order-2 sm:order-1 mt-4 sm:mt-0">💡 Mostra suggerimento</button>
-                     <button id="next-btn" class="w-full sm:w-auto bg-blue-600 text-white font-bold py-3 px-8 rounded-lg shadow-lg hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed order-1 sm:order-2" disabled>Prossima Domanda</button>
+                     <button id="next-btn" class="w-full sm:w-auto bg-purple-600 text-white font-bold py-3 px-8 rounded-lg shadow-lg hover:bg-purple-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed order-1 sm:order-2" disabled>Prossima</button>
                 </div>
 
                 <!-- Rationale/Hint Display -->
@@ -104,7 +106,7 @@
              <div class="quiz-container p-8 rounded-2xl shadow-2xl text-center">
                 <h2 class="text-3xl font-bold text-gray-800 mb-4">Quiz Completato!</h2>
                 <p class="text-gray-600 mb-2">Il tuo punteggio finale è:</p>
-                <p id="score-text" class="text-7xl font-bold text-blue-600 my-4">8 / 10</p>
+                <p id="score-text" class="text-7xl font-bold text-purple-600 my-4">8 / 10</p>
                 <p id="score-feedback" class="text-lg font-semibold mb-8"></p>
                 <button id="restart-btn" class="w-full bg-gray-700 text-white font-bold py-4 px-8 rounded-xl shadow-lg hover:bg-gray-800 transition-all text-lg transform hover:scale-105">
                     Riprova il Quiz
@@ -117,103 +119,103 @@
 <script>
 const quizData = [
     {
-      question: "Un cliente invia per la prima volta un file ZIP contenente loghi e immagini. Secondo il manuale, quale è la prima azione corretta da compiere?",
-      hint: "Pensa alla cartella che funziona come una 'casella di posta' per il materiale non ancora controllato.",
-      answerOptions: [
-        { text: "Decomprimere lo ZIP e copiare i file direttamente in `Asset Approvati`.", rationale: "Questa azione salta il passaggio di validazione, che è cruciale. La cartella `Asset Approvati` deve contenere solo materiale già verificato.", isCorrect: false },
-        { text: "Salvare il file ZIP così com'è nella cartella `Asset Grezzi`.", rationale: "Questa è la procedura corretta per la fase di 'Ingestion'. La cartella `Asset Grezzi` accoglie il materiale grezzo senza alcuna modifica iniziale.", isCorrect: true },
-        { text: "Caricare il contenuto dello ZIP nella cartella `Stampa` per un controllo rapido.", rationale: "La cartella `Stampa` è il punto di consegna finale e deve contenere solo file esecutivi pronti per la produzione, non asset di lavoro.", isCorrect: false },
-        { text: "Spostare il contenuto dello ZIP nella cartella `_Archivio Versioni Superate`.", rationale: "L'archivio serve per conservare le versioni vecchie degli asset, non per accogliere materiale nuovo.", isCorrect: false }
+      "question": "Un cliente invia un file `.zip` contenente nuovi loghi. Qual è la prima azione corretta da compiere secondo il manuale?",
+      "hint": "Ogni processo inizia da un punto di raccolta grezzo, prima di ogni elaborazione.",
+      "answerOptions": [
+        { "text": "Salvare il file in `01_Ricevuti_Cliente` senza alcuna modifica.", "rationale": "Questa è la funzione specifica della cartella `01_Ricevuti_Cliente`, che agisce come inbox per il materiale grezzo.", "isCorrect": true },
+        { "text": "Estrarre subito i file e metterli in `02_Asset_Approvati`.", "rationale": "Questa azione salta il passaggio fondamentale della validazione e della conservazione del file originale grezzo.", "isCorrect": false },
+        { "text": "Salvare il file direttamente nella cartella `03_Archivio`.", "rationale": "L'archivio è destinato solo agli asset che sono stati approvati e poi resi obsoleti, non al materiale appena ricevuto.", "isCorrect": false },
+        { "text": "Copiare il file `.zip` nella cartella `Stampa`.", "rationale": "La cartella `Stampa` contiene solo i file esecutivi finali (PDF) pronti per la produzione, non gli asset di lavoro.", "isCorrect": false }
       ]
     },
     {
-      question: "Qual è la funzione principale della cartella `Asset Approvati`?",
-      hint: "Questa cartella è il cuore del sistema. Come viene definita nel manuale?",
-      answerOptions: [
-        { text: "Contenere tutte le versioni di un asset, incluse quelle superate.", rationale: "Le versioni superate hanno una loro cartella dedicata, l'archivio. Questa cartella deve rimanere pulita.", isCorrect: false },
-        { text: "Essere la libreria centrale e ufficiale da cui i designer devono collegare gli asset.", rationale: "Questa è esattamente la sua funzione di 'Source of Truth', garantendo che tutti utilizzino sempre l'ultima versione approvata.", isCorrect: true },
-        { text: "Un'area di lavoro temporanea per modificare gli asset prima di finalizzarli.", rationale: "Le modifiche e le lavorazioni avvengono nel file di lavoro del designer; questa cartella contiene solo gli asset già finalizzati e approvati.", isCorrect: false },
-        { text: "Raccogliere i file esportati pronti per essere inviati al fornitore.", rationale: "Questa è la funzione della cartella `Stampa`. `Asset Approvati` contiene i componenti, non il prodotto finito.", isCorrect: false }
+      "question": "Dopo aver validato un logo da `01_Ricevuti_Cliente`, quale operazione esegui per renderlo disponibile per i progetti?",
+      "hint": "La libreria centrale deve essere una copia 'pulita' e ufficiale, preservando l'originale grezzo.",
+      "answerOptions": [
+        { "text": "Lo COPI in `02_Asset_Approvati` con un nome standardizzato.", "rationale": "L'azione corretta è copiare l'asset validato, rendendolo la nuova 'source of truth' senza eliminare il file originale ricevuto.", "isCorrect": true },
+        { "text": "Lo SPOSTI in `02_Asset_Approvati`.", "rationale": "Spostare il file eliminerebbe la traccia del file originale ricevuto, che invece deve essere conservato in `01_Ricevuti_Cliente`.", "isCorrect": false },
+        { "text": "Crei un collegamento (link) al file da `01_Ricevuti_Cliente` nel tuo progetto.", "rationale": "I progetti devono collegarsi solo alla libreria centrale (`02_Asset_Approvati`), non direttamente ai file grezzi.", "isCorrect": false },
+        { "text": "Lo ESPORTI come PDF nella cartella `Stampa`.", "rationale": "Questa azione è prematura; l'asset deve prima essere utilizzato in un progetto e solo il risultato finale verrà esportato.", "isCorrect": false }
       ]
     },
     {
-      question: "Un designer deve aggiornare il logo in un progetto. La nuova versione del logo si trova in `Asset Grezzi`. Qual è la sequenza corretta di azioni?",
-      hint: "Considera il ciclo di vita di un asset: validazione, uso e archiviazione della vecchia versione.",
-      answerOptions: [
-        { text: "Sposta il nuovo logo in `Asset Approvati` e cancella quello vecchio.", rationale: "L'azione corretta per la vecchia versione è spostarla nell'archivio, non cancellarla, per mantenere uno storico.", isCorrect: false },
-        { text: "Copia il nuovo logo in `Asset Approvati` e sposta quello vecchio in `_Archivio Versioni Superate`.", rationale: "Questa sequenza rispetta tutte le regole: il nuovo asset viene validato (copiato), e la versione precedente viene correttamente archiviata (spostata).", isCorrect: true },
-        { text: "Collega il logo direttamente da `Asset Grezzi` per fare più in fretta.", rationale: "Questa è una violazione della regola fondamentale. I file di lavoro devono collegare asset esclusivamente da `Asset Approvati`.", isCorrect: false },
-        { text: "Copia sia il vecchio che il nuovo logo in `Asset Approvati` per sicurezza.", rationale: "Avere due versioni dello stesso asset in questa cartella crea ambiguità e va contro il suo scopo di 'Fonte Unica della Verità'.", isCorrect: false }
+      "question": "Un nuovo logo in `02_Asset_Approvati` sostituisce la versione precedente. Cosa succede al vecchio file del logo?",
+      "hint": "Il sistema non prevede la perdita di dati, ma la loro ricollocazione in base allo stato di 'attivo' o 'superato'.",
+      "answerOptions": [
+        { "text": "Viene SPOSTATO in `03_Archivio`.", "rationale": "L'archivio serve proprio a conservare lo storico delle versioni superate, mantenendo la libreria centrale pulita.", "isCorrect": true },
+        { "text": "Viene CANCELLATO definitivamente.", "rationale": "Il workflow prevede di conservare uno storico, quindi la cancellazione definitiva di un asset obsoleto non è la procedura corretta.", "isCorrect": false },
+        { "text": "Viene lasciato in `02_Asset_Approvati` con il suffisso \"_old\".", "rationale": "La libreria centrale deve contenere solo la versione ufficiale e in uso, senza file obsoleti che potrebbero creare confusione.", "isCorrect": false },
+        { "text": "Viene COPIATO in `03_Archivio`.", "rationale": "L'azione corretta è 'spostare', non 'copiare', per rimuovere fisicamente il file obsoleto dalla libreria attiva.", "isCorrect": false }
       ]
     },
     {
-      question: "Come deve essere organizzata la struttura interna della cartella `Stampa`?",
-      hint: "Pensa a chi è il destinatario finale dei file contenuti in questa cartella.",
-      answerOptions: [
-        { text: "In sottocartelle basate sulla tipologia di materiale (Teli, Forex, Adesivi).", rationale: "Questa era una proposta iniziale, ma il manuale finale specifica un'organizzazione diversa, basata sul destinatario.", isCorrect: false },
-        { text: "In sottocartelle nominate con il nome esatto del Fornitore.", rationale: "Questa è la struttura corretta. Ogni fornitore avrà la sua cartella dedicata per evitare confusioni nella consegna.", isCorrect: true },
-        { text: "Tutti i file PDF insieme, senza sottocartelle, per semplicità.", rationale: "Questa opzione creerebbe confusione se più fornitori devono accedere alla stessa cartella per lavori diversi.", isCorrect: false },
-        { text: "In sottocartelle basate sulla data di esportazione (V1, V2, ecc.).", rationale: "Il manuale specifica esplicitamente che nella cartella `Stampa` non deve esistere alcun tipo di versioning.", isCorrect: false }
+      "question": "Mentre lavori su un file `layout_pannello.ai`, da quale cartella devi OBBLIGATORIAMENTE collegare gli asset?",
+      "hint": "La 'Source of Truth' è il cuore del sistema per garantire la consistenza e usare sempre la versione corretta dei file.",
+      "answerOptions": [
+        { "text": "`02_Asset_Approvati`", "rationale": "Questa è la regola fondamentale per garantire che tutti i progetti utilizzino sempre e solo l'ultima versione validata degli asset.", "isCorrect": true },
+        { "text": "`01_Ricevuti_Cliente`", "rationale": "Collegarsi ai file grezzi è rischioso perché non sono stati validati e potrebbero non essere le versioni finali.", "isCorrect": false },
+        { "text": "`03_Archivio`", "rationale": "Collegarsi all'archivio significherebbe usare deliberatamente una versione obsoleta e superata di un asset.", "isCorrect": false },
+        { "text": "Una cartella personale sul tuo desktop.", "rationale": "Usare file locali rompe la centralizzazione del sistema e rende impossibile garantire la consistenza tra i progetti.", "isCorrect": false }
       ]
     },
     {
-      question: "Qual è la regola fondamentale per il 'File di Lavoro' del designer (.indd, .ai)?",
-      hint: "Questa regola garantisce che, anche se il file di progetto si trova sul computer del designer, il risultato sia sempre corretto.",
-      answerOptions: [
-        { text: "Deve essere sempre salvato all'interno della cartella `Asset Approvati`.", rationale: "La sua localizzazione è libera; l'importante è da dove preleva le risorse, non dove viene salvato.", isCorrect: false },
-        { text: "Deve contenere copie incorporate di tutti gli asset per evitare link mancanti.", rationale: "Incorporare gli asset impedirebbe l'aggiornamento automatico se un asset in `Asset Approvati` cambia. I file devono essere collegati.", isCorrect: false },
-        { text: "Deve collegare gli asset esclusivamente dalla libreria `Asset Approvati`.", rationale: "Questa è la regola cruciale che assicura l'integrità del progetto, garantendo che si usino sempre e solo le versioni ufficiali.", isCorrect: true },
-        { text: "Deve avere lo stesso nome del file PDF che verrà esportato.", rationale: "Non c'è una regola specifica sulla corrispondenza dei nomi; l'importante è il contenuto e i collegamenti.", isCorrect: false }
+      "question": "Hai terminato e approvato il layout di un roll-up per il fornitore 'StamperiaRossi'. Dove salvi il PDF finale esportato?",
+      "hint": "L'organizzazione della cartella di output finale è strutturata per destinatario.",
+      "answerOptions": [
+        { "text": "Nella sottocartella `Stampa/StamperiaRossi/`.", "rationale": "Il manuale specifica che i file esecutivi devono essere organizzati in sottocartelle nominate con il nome del fornitore.", "isCorrect": true },
+        { "text": "Direttamente nella cartella `Stampa`.", "rationale": "Questa opzione non è abbastanza specifica; manca l'organizzazione per fornitore, che è un requisito del flusso.", "isCorrect": false },
+        { "text": "In `02_Asset_Approvati`, insieme agli altri asset.", "rationale": "La libreria centrale contiene gli elementi per costruire i progetti, non i prodotti finiti (esecutivi di stampa).", "isCorrect": false },
+        { "text": "In `03_Archivio`.", "rationale": "L'archivio è per i file obsoleti, non per i file finali pronti per essere prodotti.", "isCorrect": false }
       ]
     },
     {
-      question: "Dopo aver esportato un PDF nella cartella `Stampa/StamperiaRossi/`, ti accorgi di un errore. Cosa fai?",
-      hint: "Come si gestisce una revisione nel punto di consegna finale?",
-      answerOptions: [
-        { text: "Crei una sottocartella `V2` e inserisci lì il nuovo PDF.", rationale: "Il versioning è esplicitamente vietato nella cartella `Stampa` per evitare ambiguità per il fornitore.", isCorrect: false },
-        { text: "Lasci il vecchio PDF e aggiungi quello nuovo con il suffisso '_corretto'.", rationale: "Avere due file per lo stesso lavoro nella cartella di consegna è una fonte sicura di errori di produzione.", isCorrect: false },
-        { text: "Sposti il PDF errato nell'archivio e carichi quello nuovo.", rationale: "L'archivio è per gli asset, non per gli esecutivi di stampa. La procedura per la cartella Stampa è più drastica.", isCorrect: false },
-        { text: "Cancelli il PDF errato e lo sostituisci con la nuova versione corretta.", rationale: "Questa è la procedura corretta. La cartella `Stampa` deve contenere solo una versione del file: quella giusta.", isCorrect: true }
+      "question": "Noti un refuso nel file `roll-up.pdf` già presente in `Stampa/StamperiaRossi/`. Qual è la procedura corretta?",
+      "hint": "La cartella `Stampa` non deve avere versioning, solo la verità assoluta e più recente.",
+      "answerOptions": [
+        { "text": "Correggi il file di lavoro, esporti il nuovo PDF e CANCELLI il vecchio per sostituirlo.", "rationale": "Il manuale specifica che i file obsoleti nella cartella Stampa vengono cancellati e sostituiti, non versionati.", "isCorrect": true },
+        { "text": "Crei una cartella `V2` dentro `Stampa/StamperiaRossi/`.", "rationale": "Questo creerebbe confusione per il fornitore. La cartella Stampa deve contenere solo i file attuali.", "isCorrect": false },
+        { "text": "Rinomini il vecchio file `roll-up_OLD.pdf` e aggiungi il nuovo.", "rationale": "Lasciare file obsoleti, anche se rinominati, nella cartella di produzione aumenta il rischio di errori di stampa.", "isCorrect": false },
+        { "text": "Sposti il file vecchio in `03_Archivio`.", "rationale": "L'archivio è per gli asset di lavoro superati, non per gli esecutivi di stampa finali che sono stati sostituiti.", "isCorrect": false }
       ]
     },
     {
-      question: "Qual è lo stato di un file che si trova nella cartella `_Archivio Versioni Superate`?",
-      hint: "Pensa alla funzione di questa cartella: è un componente attivo del progetto o uno storico?",
-      answerOptions: [
-        { text: "🟢 Validato, Ufficiale, In Uso.", rationale: "Questo è lo stato di un file in `Asset Approvati`, ovvero un file correntemente in uso nel progetto.", isCorrect: false },
-        { text: "🟡 Grezzo, Non Validato.", rationale: "Questo stato appartiene a un file appena ricevuto dal cliente, che si trova in `Asset Grezzi`.", isCorrect: false },
-        { text: "⚫ Obsoleto, Archiviato.", rationale: "Questo stato descrive perfettamente un file che non è più in uso ma viene conservato per ragioni storiche.", isCorrect: true },
-        { text: "🔵 Finale, Pronto per la Produzione.", rationale: "Questo è lo stato di un file esecutivo che si trova nella cartella `Stampa`, pronto per il fornitore.", isCorrect: false }
+      "question": "Secondo il manuale, quale di queste frasi descrive meglio la funzione della cartella `03_Archivio`?",
+      "hint": "Pensa a cosa succede a un file quando viene sostituito nella libreria centrale.",
+      "answerOptions": [
+        { "text": "È un deposito storico per gli asset che non sono più in uso attivo.", "rationale": "Questa è la definizione esatta: un luogo per conservare le versioni superate senza che interferiscano con il lavoro corrente.", "isCorrect": true },
+        { "text": "È una cartella temporanea per i file in attesa di validazione.", "rationale": "I file in attesa di validazione si trovano in `01_Ricevuti_Cliente`, non nell'archivio.", "isCorrect": false },
+        { "text": "È il luogo dove si salvano le bozze dei progetti dei designer.", "rationale": "Il manuale non definisce una posizione standard per le bozze, ma l'archivio è specificamente per gli asset approvati e poi resi obsoleti.", "isCorrect": false },
+        { "text": "È una copia di backup di tutti i file mandati in stampa.", "rationale": "Non è una sua funzione. La cartella `Stampa` contiene i file finali, ma l'archivio gestisce gli asset di origine.", "isCorrect": false }
       ]
     },
     {
-      question: "Quale azione descrive correttamente il passaggio di un file da `Asset Grezzi` a `Asset Approvati`?",
-      hint: "Cosa succede dopo che un file è stato controllato e ritenuto idoneo?",
-      answerOptions: [
-        { text: "SPOSTATO", rationale: "Spostare il file eliminerebbe la traccia del file originale ricevuto dal cliente. Si preferisce mantenere l'originale in `Asset Grezzi`.", isCorrect: false },
-        { text: "COLLEGATO", rationale: "Il collegamento avviene tra il file di lavoro del designer e la cartella `Asset Approvati`, non tra queste due cartelle.", isCorrect: false },
-        { text: "COPIATO", rationale: "L'azione corretta è copiare, perché si crea una versione validata e pulita nella libreria centrale, mantenendo l'originale grezzo al suo posto.", isCorrect: true },
-        { text: "ESPORTATO", rationale: "L'esportazione è l'azione finale che crea il PDF per la stampa, non un passaggio intermedio tra cartelle di asset.", isCorrect: false }
+      "question": "Quale di queste operazioni descrive un'azione di SPOSTA secondo il workflow?",
+      "hint": "L'azione di 'spostare' implica che il file cambia 'residenza' perché il suo stato è cambiato da attivo a obsoleto.",
+      "answerOptions": [
+        { "text": "Prendere un asset obsoleto da `02_Asset_Approvati` e metterlo in `03_Archivio`.", "rationale": "Questa è l'operazione di 'SPOSTA' per eccellenza nel manuale: il file viene rimosso dalla libreria attiva perché superato.", "isCorrect": true },
+        { "text": "Prendere un asset da `01_Ricevuti_Cliente` e metterlo in `02_Asset_Approvati`.", "rationale": "Questa operazione è una COPIA, non uno spostamento, per preservare il file grezzo originale.", "isCorrect": false },
+        { "text": "Cancellare un PDF obsoleto dalla cartella `Stampa`.", "rationale": "Questa è un'azione di CANCELLAZIONE, non uno spostamento, poiché il file non viene ricollocato altrove.", "isCorrect": false },
+        { "text": "Collegare un logo da `02_Asset_Approvati` a un file di InDesign.", "rationale": "Questa è un'operazione di COLLEGAMENTO (linking), non uno spostamento fisico del file.", "isCorrect": false }
       ]
     },
     {
-      question: "Un designer ha appena finito un progetto. Quale tipo di file deve mettere nella cartella `Stampa`?",
-      hint: "Pensa a cosa serve effettivamente al fornitore per poter produrre il materiale.",
-      answerOptions: [
-        { text: "Il file di lavoro `.ai` o `.indd` con tutti gli asset collegati.", rationale: "Il fornitore potrebbe non avere i font o le licenze corrette; ha bisogno di un file 'chiuso' e universale.", isCorrect: false },
-        { text: "Un file `.zip` contenente il PDF e tutti gli asset usati.", rationale: "Fornire gli asset separatamente non è necessario se il PDF è stato creato correttamente e può creare confusione.", isCorrect: false },
-        { text: "Un file PDF ad alta risoluzione, pronto per la produzione.", rationale: "Questo è l'unico formato accettato. È un file esecutivo, universale e pronto per essere mandato in macchina.", isCorrect: true },
-        { text: "Un'immagine `.jpg` di anteprima per approvazione finale.", rationale: "Le anteprime non sono file di produzione. La cartella `Stampa` contiene solo file esecutivi finali.", isCorrect: false }
+      "question": "Qual è lo stato di un file che si trova nella cartella `01_Ricevuti_Cliente`?",
+      "hint": "Questa è la primissima fermata per qualsiasi file che entra nel sistema dall'esterno.",
+      "answerOptions": [
+        { "text": "Grezzo, Non Validato", "rationale": "I file in questa cartella sono esattamente come sono stati forniti dal cliente, in attesa di essere controllati e validati.", "isCorrect": true },
+        { "text": "Validato, Ufficiale, In Uso", "rationale": "Questo è lo stato dei file in `02_Asset_Approvati`, non in `01_Ricevuti_Cliente`.", "isCorrect": false },
+        { "text": "Finale, Pronto per la Produzione", "rationale": "Questo è lo stato dei file PDF esecutivi che si trovano nella cartella `Stampa`.", "isCorrect": false },
+        { "text": "Obsoleto, Archiviato", "rationale": "Questo è lo stato dei file che sono stati spostati in `03_Archivio`.", "isCorrect": false }
       ]
     },
     {
-      question: "Perché la cartella `_Archivio Versioni Superate` è importante?",
-      hint: "Anche se contiene file non più in uso, quale vantaggio offre al team?",
-      answerOptions: [
-        { text: "Per liberare spazio nella cartella `Asset Approvati`.", rationale: "Sebbene liberi spazio, il suo scopo primario non è legato alla gestione dello storage ma alla tracciabilità.", isCorrect: false },
-        { text: "Per fornire al cliente una cronologia di tutte le modifiche.", rationale: "È uno strumento interno. La sua funzione è di mantenere uno storico per il team, non necessariamente per il cliente.", isCorrect: false },
-        { text: "Per poter recuperare una versione precedente in caso di errori o ripensamenti.", rationale: "Questo è il suo valore strategico. Fornisce uno storico completo e permette di recuperare versioni passate se necessario.", isCorrect: true },
-        { text: "Per dare al fornitore un'idea del lavoro svolto.", rationale: "Il fornitore non deve mai accedere a questa cartella; vedrà solo il contenuto della cartella `Stampa`.", isCorrect: false }
+      "question": "Un designer deve iniziare un nuovo progetto. Dove salva il suo file di lavoro (es. `progetto.ai`)?",
+      "hint": "Il manuale si concentra su DA DOVE il file del designer prende gli asset, non su DOVE il file del designer risiede.",
+      "answerOptions": [
+        { "text": "La posizione del file di lavoro è flessibile e non è definita dal manuale.", "rationale": "Il manuale definisce il file di lavoro come un 'Componente Esterno' e la sua unica regola è che deve collegarsi alla libreria centrale.", "isCorrect": true },
+        { "text": "Deve salvarlo obbligatoriamente in `02_Asset_Approvati`.", "rationale": "Questa cartella contiene solo gli asset da collegare, non i file di progetto che li utilizzano, per mantenere la libreria pulita.", "isCorrect": false },
+        { "text": "Deve salvarlo in una sottocartella di `Stampa`.", "rationale": "La cartella `Stampa` è solo per gli output finali (PDF), non per i file di lavoro sorgente.", "isCorrect": false },
+        { "text": "Deve salvarlo in `03_Archivio`.", "rationale": "L'archivio è per i file superati, non per i progetti attivi.", "isCorrect": false }
       ]
     }
 ];
@@ -262,7 +264,7 @@ function showQuestion() {
     shuffledOptions.forEach(option => {
         const button = document.createElement('button');
         button.innerHTML = option.text;
-        button.classList.add('option-btn', 'w-full', 'p-4', 'border-2', 'border-gray-300', 'rounded-xl', 'text-left', 'bg-white', 'hover:bg-blue-50', 'hover:border-blue-400');
+        button.classList.add('option-btn', 'w-full', 'p-4', 'border-2', 'border-gray-300', 'rounded-xl', 'text-left', 'bg-white', 'hover:bg-purple-50', 'hover:border-purple-400');
         button.dataset.correct = option.isCorrect;
         button.dataset.rationale = option.rationale;
         button.addEventListener('click', selectAnswer);
@@ -300,6 +302,9 @@ function selectAnswer(e) {
     rationaleText.innerHTML = `<strong>Spiegazione:</strong> ${selectedBtn.dataset.rationale}`;
     rationaleContainer.classList.add('show');
     
+    if (currentQuestionIndex === quizData.length - 1) {
+        nextBtn.innerText = 'Mostra Risultati';
+    }
     nextBtn.disabled = false;
 }
 
@@ -333,15 +338,16 @@ function showResults() {
     let feedback = '';
     if (percentage === 100) {
         feedback = 'Perfetto! Conosci il flusso come le tue tasche.';
-        scoreText.style.color = '#16a34a';
+        scoreText.style.color = '#16a34a'; // Verde
     } else if (percentage >= 70) {
         feedback = 'Ottimo lavoro! Hai una solida conoscenza del processo.';
-        scoreText.style.color = '#2563eb';
+        scoreText.style.color = '#8b5cf6'; // Viola
     } else {
         feedback = 'Buon tentativo! Rivedere il manuale ti aiuterà a chiarire i dubbi.';
-        scoreText.style.color = '#f59e0b';
+        scoreText.style.color = '#f59e0b'; // Ambra
     }
     scoreFeedback.innerText = feedback;
+    nextBtn.innerText = 'Prossima';
 }
 
 startBtn.addEventListener('click', startQuiz);
